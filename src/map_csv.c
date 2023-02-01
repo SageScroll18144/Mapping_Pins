@@ -14,14 +14,19 @@ int main(){
     FILE *file_writer = fopen(path, "a");  
     FILE *file_reader = fopen("pins.txt", "r");
     
-    //fwrite("\n", sizeof(char), 1, file_writer);
+    fwrite("\n", sizeof(char), 1, file_writer);
+
+    int flag_title = 0;
+    
     char line[110];
     while(!feof(file_reader)){
+        
         fgets(line, 110, file_reader);
-        printf("%s", line);
-        fwrite(line, sizeof(char), strlen(line), file_writer);
+        
+        if(flag_title) fwrite(line, sizeof(char), strlen(line), file_writer);
+        if(!flag_title) flag_title = 1;
     }
-    //fwrite("\n", sizeof(char), 1, file_writer);
+    
 
     fclose(file_writer);
     fclose(file_reader);
