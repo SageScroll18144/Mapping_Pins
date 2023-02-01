@@ -18,16 +18,17 @@ int main(){
 
     int flag_title = 0;
     
-    char line[110];
+    char tmp[50], line[110];
     while(!feof(file_reader)){
         
-        fgets(line, 110, file_reader);
+        fgets(tmp, 50, file_reader);
+        tmp[strlen(tmp)-1] = '\0';
+        sprintf(line, "%s,,,,,,\n", tmp);
         
         if(flag_title) fwrite(line, sizeof(char), strlen(line), file_writer);
         if(!flag_title) flag_title = 1;
     }
     
-
     fclose(file_writer);
     fclose(file_reader);
 
